@@ -40,7 +40,7 @@ jobs:
             terraform apply -f
 
 workflows:
-  default:
+  check:
     jobs:
       - terraform-plan:
           context: devtest
