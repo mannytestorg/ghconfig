@@ -48,7 +48,7 @@ resource "github_branch_protection" ghconfig_master_branch {
   enforce_admins = true
   required_status_checks {
     strict = true
-    contexts = ["ci/circleci"]
+    contexts = ["ci/circleci:check"]
   }
   required_pull_request_reviews {
     dismiss_stale_reviews = true
