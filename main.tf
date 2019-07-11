@@ -78,6 +78,28 @@ resource "github_branch_protection" test_master_branch {
   }
 }
 
+resource "github_repository" "another_test" {
+  name        = "another_test"
+  description = "Another test repo"
+  auto_init   = true
+  provisioner "local-exec" {
+    command = "curl -s -u ${var.ccitoken}: -X POST https://circleci.com/api/v1.1/project/github/${var.ghorg}/${self.name}/follow"
+  }
+}
+
+resource "github_branch_protection" another_test_master_branch {
+  repository     = github_repository.another_test.name
+  branch         = "master"
+  enforce_admins = true
+  required_status_checks {
+    strict = true
+    contexts = ["check"]
+  }
+  required_pull_request_reviews {
+    dismiss_stale_reviews = true
+  }
+}
+
 #resource "github_membership" "desbonnm-test" {
 #  username = "desbonnm-test"  # has to be username - email does not work.
 #}
