@@ -1,0 +1,2 @@
+# ghconfig
+GH config repo
