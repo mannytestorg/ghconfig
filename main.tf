@@ -81,10 +81,9 @@ resource "github_branch_protection" test_master_branch {
 resource "github_repository" "another_test" {
   name        = "another_test"
   description = "Another test repo"
-  auto_init   = true
   provisioner "local-exec" {
     command = <<EOT
-curl -s -u ${var.ccitoken}: -X POST https://circleci.com/api/v1.1/project/github/${var.ghorg}/${self.name}/follow"
+curl -s -u ${var.ccitoken}: -X POST https://circleci.com/api/v1.1/project/github/${var.ghorg}/${self.name}/follow
 GITHUB_TOKEN=${var.ghtoken} ./init_from_template.sh ${var.ghorg}/basetemplate ${var.ghorg}/${self.name}
 EOT
   }
