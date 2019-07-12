@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Use the given template repo as an initial commit for the
 # given (presumably empty) new repo.

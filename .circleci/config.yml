@@ -5,7 +5,7 @@ version: 2.1
 jobs:
   terraform-plan:
     docker:
-      - image: hashicorp/terraform:light
+      - image: thatarchguy/terraform-packer:latest
 
     steps:
       - checkout
@@ -23,7 +23,7 @@ jobs:
 
   terraform-apply:
     docker:
-      - image: hashicorp/terraform:light
+      - image: thatarchguy/terraform-packer:latest
 
     steps:
       - checkout
