@@ -13,6 +13,9 @@ new_repo_url=https://$GITHUB_TOKEN@github.com/$new_repo
 
 tmpdir=$(mktemp -dt init_from_template.XXXXXX)
 
+git config --global user.email mdes@hpe.com
+git config --global user.name manny
+
 git clone $template_repo_url $tmpdir
 
 template_sha1=$(git -C $tmpdir rev-parse origin/master)
