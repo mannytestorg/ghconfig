@@ -1,0 +1,54 @@
+# (c) Copyright 2019 Hewlett Packard Enterprise Development LP
+#
+version: 2.1
+
+jobs:
+  terraform-plan:
+    docker:
+      - image: thatarchguy/terraform-packer:latest
+
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+          # See https://circleci.com/docs/2.0/building-docker-images/#docker-version
+          # for available versions
+          version: 18.09.3
+
+      - run:
+          name: run terraform plan
+          command: |
+            terraform init
+            terraform plan
+
+  terraform-apply:
+    docker:
+      - image: thatarchguy/terraform-packer:latest
+
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+          # See https://circleci.com/docs/2.0/building-docker-images/#docker-version
+          # for available versions
+          version: 18.09.3
+
+      - run:
+          name: run terraform apply
+          command: |
+            terraform init
+            terraform apply -auto-approve
+
+workflows:
+  check:
+    jobs:
+      - terraform-plan:
+          context: devtest
+
+  merge_to_master:
+    jobs:
+      - terraform-apply:
+          filters:
+            branches:
+              only: master
+          context: devtest
